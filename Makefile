@@ -4,7 +4,12 @@ PKGDEST := $(abspath build)
 PACKAGES := $(wildcard packages/*)
 REPO_DB  := $(abspath build/arch-repo.db.tar.zst)
 
-all: $(PACKAGES) update-repo
+all: sync build update-repo
+
+sync:
+	git submodule update --init --recursive
+
+build: $(PACKAGES)
 
 $(PACKAGES):
 	@echo "Building $@..."
@@ -16,10 +21,7 @@ update-repo:
 	mkdir -p $(PKGDEST)
 	repo-add $(REPO_DB) $(PKGDEST)/*.pkg.tar.zst
 
-sync:
-	git submodule update --init --recursive
-
 clean:
 	rm -rf $(REPO_DB) $(PKGDEST)
 
-.PHONY: all $(PACKAGES) sync clean
+.PHONY: all sync build clean $(PACKAGES)
