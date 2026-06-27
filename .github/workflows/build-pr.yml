@@ -9,7 +9,7 @@ on:
 jobs:
   build:
     runs-on: "ubuntu-latest"
-    # container: "archlinux:base-devel"
+    container: "archlinux:base-devel"
     steps:
       - name: "Install dependencies"
         run: |
