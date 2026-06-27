@@ -19,9 +19,17 @@ jobs:
         with:
           submodules: "recursive"
 
-      - name: "Sync submodules"
-        run: "make sync"
+      - name: "Create non-root user"
+        run: |
+          useradd not-root
+          # Allow build to run stuff as root (to install dependencies):
+          echo "not-root ALL=(ALL) NOPASSWD: ALL" > /etc/sudoers.d/not-root
+          # change file ownership
+          chown -R not-root .
+
+      #- name: "Sync submodules"
+      #  run: "make sync"
 
       - name: "Build"
-        run: "make build"
+        run: "runuser -u not-root make build"
 ...
