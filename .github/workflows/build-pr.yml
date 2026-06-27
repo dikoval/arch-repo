@@ -13,12 +13,14 @@ jobs:
     steps:
       - name: "Install dependencies"
         run: |
-          sudo pacman -Sy --noconfirm git make
+          sudo pacman -Sy --needed --noconfirm git make
 
       - uses: "actions/checkout@v7.0.0"
+        with:
+          submodules: "recursive"
 
-      - name: "Sync submodules"
-        run: "make sync"
+      # - name: "Sync submodules"
+      #   run: "make sync"
 
       - name: "Build"
         run: "make build"
