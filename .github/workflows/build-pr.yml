@@ -10,25 +10,30 @@ jobs:
   build:
     runs-on: "ubuntu-latest"
     container: "archlinux:base-devel"
+    env:
+      BUILDER_USER: "ci-builder"
     steps:
       - name: "Install dependencies"
         run: |
-          sudo pacman -Sy --needed --noconfirm git make
+          # git is required to sync submodules with next step
+          pacman -Sy --needed --noconfirm git
 
       - uses: "actions/checkout@v7.0.0"
         with:
           submodules: "recursive"
 
-      - name: "Create non-root user"
+      - name: "Create builder user"
         run: |
-          useradd not-root
-          # Allow build to run stuff as root (to install dependencies):
-          echo "not-root ALL=(ALL) NOPASSWD: ALL" > /etc/sudoers.d/not-root
-          # change file ownership
-          #chown -R not-root .
+          # Arch Linux treats its users as children and does not allow to run `makepkg` by `root` user
+          # so we create a new user with same permissions as `root`, but named differently :)
+          useradd --no-create-home $BUILDER_USER
+          echo "$BUILDER_USER ALL=(ALL) NOPASSWD: ALL" > /etc/sudoers.d/$BUILDER_USER
+
+          # change workspace ownership
+          chown -R $BUILDER_USER $GITHUB_WORKSPACE
 
       - name: "Build"
-        run: "runuser -u not-root make build"
+        run: "runuser --user $BUILDER_USER make build"
 
       - name: "repo"
         run: "make update-repo"
