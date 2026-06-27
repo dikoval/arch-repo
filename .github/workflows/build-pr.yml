@@ -25,11 +25,11 @@ jobs:
           # Allow build to run stuff as root (to install dependencies):
           echo "not-root ALL=(ALL) NOPASSWD: ALL" > /etc/sudoers.d/not-root
           # change file ownership
-          chown -R not-root .
-
-      #- name: "Sync submodules"
-      #  run: "make sync"
+          #chown -R not-root .
 
       - name: "Build"
         run: "runuser -u not-root make build"
+
+      - name: "repo"
+        run: "make update-repo"
 ...
