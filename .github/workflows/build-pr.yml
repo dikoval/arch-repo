@@ -13,7 +13,7 @@ jobs:
     steps:
       - uses: "actions/checkout@v7.0.0"
         with:
-          submodules: true
+          submodules: 'recursive'
 
       # - name: "Sync submodules"
       #   run: "make sync"
