@@ -1,0 +1,21 @@
+---
+name: "Build PR"
+
+on:
+  pull_request:
+  # allow to trigger workflow manually
+  workflow_dispatch:
+
+jobs:
+  build:
+    runs-on: "ubuntu-latest"
+    container: "archlinux:base-devel"
+    steps:
+      - uses: "actions/checkout@v7.0.0"
+
+      - name: "Sync submodules"
+        run: "make sync"
+
+      - name: "Build"
+        run: "make build"
+...

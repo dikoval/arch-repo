@@ -1,0 +1,42 @@
+---
+name: "Build and release new repo version"
+
+on:
+  push:
+    branches: ["master", "ci"]
+  # allow to trigger workflow manually
+  workflow_dispatch:
+
+jobs:
+  build:
+    runs-on: "ubuntu-latest"
+    container: "archlinux:base-devel"
+    steps:
+      - uses: "actions/checkout@v7.0.0"
+
+      - name: "Sync submodules"
+        run: "make sync"
+
+      - name: "Build all packages"
+        run: "make build"
+
+      - name: "Update repository"
+        run: "make update-repo"
+
+      # GitHub requires presence of tag for release
+      # this action will automatically create/update `latest` tag for usage in release later on
+      - name: "Update latest tag"
+        uses: "EndBug/latest-tag@v1.6.3"
+
+      - name: "Update latest GitHub release"
+        uses: "softprops/action-gh-release@v3.0.1"
+        with:
+          name: "Latest"
+          draft: true
+          files: "build/*"
+          overwrite_files: true
+          # make_latest: true
+
+permissions:
+  contents: "write"
+...
