@@ -11,12 +11,14 @@ jobs:
     runs-on: "ubuntu-latest"
     container: "archlinux:base-devel"
     steps:
-      - uses: "actions/checkout@v7.0.0"
-        with:
-          submodules: 'recursive'
+      - name: "Install dependencies"
+        run: |
+          sudo pacman -Sy --noconfirm git make
 
-      # - name: "Sync submodules"
-      #   run: "make sync"
+      - uses: "actions/checkout@v7.0.0"
+
+      - name: "Sync submodules"
+        run: "make sync"
 
       - name: "Build"
         run: "make build"
