@@ -20,4 +20,5 @@ Add next config piece to `/etc/pacman.conf`:
 ```
 [dikoval-arch-repo]
 Server = https://github.com/dikoval/arch-repo/releases/download/latest
+SigLevel = Optional
 ```
