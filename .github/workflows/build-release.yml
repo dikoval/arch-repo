@@ -3,7 +3,7 @@ name: "Build and release new Arch Linux repository"
 
 on:
   push:
-    branches: ["master", "ci"]
+    branches: ["master"]
   # allow to trigger workflow manually
   workflow_dispatch:
 
