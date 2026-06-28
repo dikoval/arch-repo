@@ -7,6 +7,7 @@ REPO_DB  := $(abspath build/arch-repo.db.tar.zst)
 all: sync build update-repo
 
 sync:
+	git submodule sync --recursive
 	git submodule update --init --recursive
 
 build: $(PACKAGES)
