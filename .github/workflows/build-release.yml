@@ -42,8 +42,7 @@ jobs:
         with:
           name: "Latest"
           tag_name: "latest"
-          draft: true
           files: "build/*"
           overwrite_files: true
-          # make_latest: true
+          make_latest: true
 ...
