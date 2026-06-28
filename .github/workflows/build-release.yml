@@ -34,6 +34,8 @@ jobs:
       # this action will automatically create/update `latest` tag for usage in release later on
       - name: "Update latest tag"
         uses: "EndBug/latest-tag@v1.6.3"
+        with:
+          git-directory: "$GITHUB_WORKSPACE"
 
       - name: "Update latest GitHub release"
         uses: "softprops/action-gh-release@v3.0.1"
