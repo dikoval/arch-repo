@@ -1,0 +1,48 @@
+---
+name: "Build and release new Arch Linux repository"
+
+on:
+  push:
+    branches: ["master"]
+  # allow to trigger workflow manually
+  workflow_dispatch:
+
+permissions:
+  contents: "write"
+
+jobs:
+  build:
+    runs-on: "ubuntu-latest"
+    container: "archlinux:base-devel"
+    steps:
+      - name: "Install dependencies"
+        run: |
+          # git is required to sync submodules with both `checkout` action and `make sync`
+          pacman -Sy --needed --noconfirm git
+
+      - uses: "actions/checkout@v7.0.0"
+        with:
+          submodules: "recursive"
+
+      - name: "Build all packages"
+        uses: "./.github/actions/build-all-packages"
+
+      - name: "Update repository"
+        run: "make update-repo"
+
+      # GitHub requires presence of tag for release
+      # this action will automatically create/update `latest` tag for usage in release later on
+      - name: "Update latest tag"
+        uses: "richardsimko/update-tag@v2.0.0"
+        with:
+          tag_name: "latest"
+
+      - name: "Update latest GitHub release"
+        uses: "softprops/action-gh-release@v3.0.1"
+        with:
+          name: "Latest"
+          tag_name: "latest"
+          files: "build/*"
+          overwrite_files: true
+          make_latest: true
+...
