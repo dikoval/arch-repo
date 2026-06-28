@@ -15,7 +15,14 @@ jobs:
     runs-on: "ubuntu-latest"
     container: "archlinux:base-devel"
     steps:
+      - name: "Install dependencies"
+        run: |
+          # git is required to sync submodules with both `checkout` action and `make sync`
+          pacman -Sy --needed --noconfirm git
+
       - uses: "actions/checkout@v7.0.0"
+        with:
+          submodules: "recursive"
 
       - name: "Build all packages"
         uses: "./.github/actions/build-all-packages"

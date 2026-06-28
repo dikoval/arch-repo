@@ -12,12 +12,6 @@ inputs:
 runs:
   using: "composite"
   steps:
-    - name: "Install dependencies"
-      shell: "bash"
-      run: |
-        # git is required to sync submodules with both `checkout` action and `make sync`
-        pacman -Sy --needed --noconfirm git
-
     - name: "Create builder user"
       shell: "bash"
       env:
