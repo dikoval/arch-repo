@@ -15,7 +15,7 @@ build: $(PACKAGES)
 $(PACKAGES):
 	@echo "Building $@..."
 	mkdir -p $(PKGDEST)
-	makepkg --config $(CONFIG) --dir $@ --clean --force --syncdeps PKGDEST=$(PKGDEST)
+	makepkg --config $(CONFIG) --dir $@ --clean --force --syncdeps --noconfirm PKGDEST=$(PKGDEST)
 
 update-repo:
 	@echo "Updating repo $(REPO_DB)..."
