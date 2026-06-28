@@ -2,7 +2,7 @@ CONFIG  := $(abspath config/makepkg.conf)
 PKGDEST := $(abspath build)
 
 PACKAGES := $(wildcard packages/*)
-REPO_DB  := $(abspath build/arch-repo.db.tar.zst)
+REPO_DB  := $(abspath build/dikoval-arch-repo.db.tar.zst)
 
 all: sync build update-repo
 
