@@ -24,18 +24,16 @@ jobs:
         with:
           submodules: "recursive"
 
-      - name: "Build all packages"
-        uses: "./.github/actions/build-all-packages"
+      # - name: "Build all packages"
+      #   uses: "./.github/actions/build-all-packages"
 
-      - name: "Update repository"
-        run: "make update-repo"
+      # - name: "Update repository"
+      #   run: "make update-repo"
 
       # GitHub requires presence of tag for release
       # this action will automatically create/update `latest` tag for usage in release later on
       - name: "Update latest tag"
         uses: "EndBug/latest-tag@v1.6.3"
-        with:
-          git-directory: "$GITHUB_WORKSPACE"
 
       - name: "Update latest GitHub release"
         uses: "softprops/action-gh-release@v3.0.1"
