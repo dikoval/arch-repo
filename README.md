@@ -3,7 +3,13 @@ This repository contains a mix of AUR and custom packages, which I use.
 Repository is hosted via GitHub Releases.
 
 ## How to add new package?
-TODO
+For AUR packages:
+* `cd packages`
+* `git submodule add <AUR git clone URL>`
+* `git add . && git commit && git push`
+
+For own packages:
+TBD
 
 ## How to update existing package?
 1. Update submodule - TODO
