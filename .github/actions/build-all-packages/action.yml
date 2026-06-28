@@ -22,10 +22,6 @@ runs:
         useradd --no-create-home $BUILDER_USER
         echo "$BUILDER_USER ALL=(ALL) NOPASSWD: ALL" > /etc/sudoers.d/$BUILDER_USER
 
-    - name: "Sync submodules"
-      shell: "bash"
-      run: "make sync"
-
     - name: "Build"
       shell: "bash"
       env:
