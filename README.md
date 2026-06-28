@@ -10,4 +10,8 @@ TODO
 2. Re-build package - `make package/<name>` or push the changes for CI to build it
 
 ## How to add this repository to pacman?
-TODO
+Add next config piece to `/etc/pacman.conf`:
+```
+[dikoval-arch-repo]
+Server = https://github.com/dikoval/arch-repo/releases/download/latest
+```
