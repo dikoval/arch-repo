@@ -1,11 +1,14 @@
 ---
-name: "Build and release new repo version"
+name: "Build and release new Arch Linux repository"
 
 on:
   push:
-    branches: ["master"]
+    branches: ["master", "ci"]
   # allow to trigger workflow manually
   workflow_dispatch:
+
+permissions:
+  contents: "write"
 
 jobs:
   build:
@@ -14,11 +17,8 @@ jobs:
     steps:
       - uses: "actions/checkout@v7.0.0"
 
-      - name: "Sync submodules"
-        run: "make sync"
-
       - name: "Build all packages"
-        run: "make build"
+        uses: "$GITHUB_WORKSPACE/.github/actions/build-all-packages"
 
       - name: "Update repository"
         run: "make update-repo"
@@ -36,7 +36,4 @@ jobs:
           files: "build/*"
           overwrite_files: true
           # make_latest: true
-
-permissions:
-  contents: "write"
 ...

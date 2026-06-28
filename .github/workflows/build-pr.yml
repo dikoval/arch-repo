@@ -3,38 +3,14 @@ name: "Build PR"
 
 on:
   pull_request:
-  # allow to trigger workflow manually
-  workflow_dispatch:
 
 jobs:
   build:
     runs-on: "ubuntu-latest"
     container: "archlinux:base-devel"
-    env:
-      BUILDER_USER: "ci-builder"
     steps:
-      - name: "Install dependencies"
-        run: |
-          # git is required to sync submodules with next step
-          pacman -Sy --needed --noconfirm git
-
       - uses: "actions/checkout@v7.0.0"
-        with:
-          submodules: "recursive"
 
-      - name: "Create builder user"
-        run: |
-          # Arch Linux treats its users as children and does not allow to run `makepkg` by `root` user
-          # so we create a new user with same permissions as `root`, but named differently :)
-          useradd --no-create-home $BUILDER_USER
-          echo "$BUILDER_USER ALL=(ALL) NOPASSWD: ALL" > /etc/sudoers.d/$BUILDER_USER
-
-          # change workspace ownership
-          chown -R $BUILDER_USER $GITHUB_WORKSPACE
-
-      - name: "Build"
-        run: "runuser --user $BUILDER_USER make build"
-
-      - name: "repo"
-        run: "make update-repo"
+      - name: "Build all packages"
+        uses: "$GITHUB_WORKSPACE/.github/actions/build-all-packages"
 ...
