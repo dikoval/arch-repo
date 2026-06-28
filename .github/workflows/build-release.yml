@@ -24,11 +24,11 @@ jobs:
         with:
           submodules: "recursive"
 
-      # - name: "Build all packages"
-      #   uses: "./.github/actions/build-all-packages"
+      - name: "Build all packages"
+        uses: "./.github/actions/build-all-packages"
 
-      # - name: "Update repository"
-      #   run: "make update-repo"
+      - name: "Update repository"
+        run: "make update-repo"
 
       # GitHub requires presence of tag for release
       # this action will automatically create/update `latest` tag for usage in release later on
@@ -41,6 +41,7 @@ jobs:
         uses: "softprops/action-gh-release@v3.0.1"
         with:
           name: "Latest"
+          tag_name: "latest"
           draft: true
           files: "build/*"
           overwrite_files: true
