@@ -30,6 +30,11 @@ jobs:
       - name: "Update repository"
         run: "make update-repo"
 
+      - name: "Record build date and time"
+        run: |
+          echo "DATE=$(date --utc --iso-8601=date)" >> $GITHUB_ENV
+          echo "DATE_TIME=$(date --utc --iso-8601=seconds)" >> $GITHUB_ENV
+
       # GitHub requires presence of tag for release
       # this action will automatically create/update `latest` tag for usage in release later on
       - name: "Update latest tag"
@@ -40,7 +45,8 @@ jobs:
       - name: "Update latest GitHub release"
         uses: "softprops/action-gh-release@v3.0.1"
         with:
-          name: "Latest"
+          name: "Latest - ${{ env.DATE }}"
+          body: "Built on ${{ env.DATE_TIME }}"
           tag_name: "latest"
           files: "build/*"
           overwrite_files: true
