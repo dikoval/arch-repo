@@ -4,3 +4,6 @@
 [submodule "packages/ltex-ls-plus-bin"]
 	path = packages/ltex-ls-plus-bin
 	url = https://aur.archlinux.org/ltex-ls-plus-bin.git
+[submodule "packages/kavita-bin"]
+	path = packages/kavita-bin
+	url = https://aur.archlinux.org/kavita-bin.git
