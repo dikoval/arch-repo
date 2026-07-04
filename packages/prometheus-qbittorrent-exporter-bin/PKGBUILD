@@ -1,0 +1,19 @@
+# Package name should be unique
+pkgname="prometheus-qbittorrent-exporter-bin"
+pkgver="0.3.0"
+pkgrel="1"
+pkgdesc="Prometheus exporter for QBittorrent"
+
+arch=("x86_64")
+license=("GPL2")
+url="https://github.com/dikoval/prometheus-qbittorrent-exporter"
+
+backup=("etc/conf.d/prometheus-qbittorrent-exporter")
+source=("https://github.com/dikoval/prometheus-qbittorrent-exporter/releases/download/${pkgver}/prometheus-qbittorrent-exporter.tar.gz")
+sha256sums=("9c405ded10e04b21a63f447f6e0276dd6280d3ec45cb9f41203a3b2d1347fb69")
+
+package() {
+    install -D --mode=755 "$srcdir/prometheus-qbittorrent-exporter" "$pkgdir/usr/bin/prometheus-qbittorrent-exporter"
+    install -D --mode=644 "$srcdir/prometheus-qbittorrent-exporter.env" "$pkgdir/etc/conf.d/prometheus-qbittorrent-exporter"
+    install -D --mode=644 "$srcdir/prometheus-qbittorrent-exporter.service" "$pkgdir/usr/lib/systemd/system/prometheus-qbittorrent-exporter.service"
+}
