@@ -22,6 +22,9 @@ update-repo:
 	mkdir -p $(PKGDEST)
 	repo-add $(REPO_DB) $(PKGDEST)/*.pkg.tar.zst
 
+lint:
+	find "packages" -type f -iname "PKGBUILD" | xargs namcap
+
 clean:
 	rm -rf $(REPO_DB) $(PKGDEST)
 
