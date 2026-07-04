@@ -1,4 +1,4 @@
-# Package name should be unique
+# Maintainer: Dima Koval <dikoval@github.com>
 pkgname="prometheus-qbittorrent-exporter-bin"
 pkgver="0.3.0"
 pkgrel="1"
