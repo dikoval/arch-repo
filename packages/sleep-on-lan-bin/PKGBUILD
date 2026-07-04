@@ -1,0 +1,19 @@
+# Maintainer: Dima Koval <dikoval@github.com>
+pkgname="sleep-on-lan-bin"
+pkgver="0.4.0"
+pkgrel="1"
+pkgdesc="UDP service, which puts machine into sleep/suspend on receival of magic package."
+
+arch=("x86_64")
+license=("GPL2")
+url="https://github.com/dikoval/sleep-on-lan"
+
+backup=("etc/sleep-on-lan.conf")
+source=("https://github.com/dikoval/sleep-on-lan/releases/download/v${pkgver}/sleep-on-lan.tar.gz")
+sha256sums=("1864dcdb53f6d4eabda41ff513470888c2f944bc848ece591b4dbe994a4fe6ef")
+
+package() {
+    install -D --mode=755 "$srcdir/sleep-on-lan" "$pkgdir/usr/bin/sleep-on-lan"
+    install -D --mode=644 "$srcdir/sleep-on-lan.conf" "$pkgdir/etc/sleep-on-lan.conf"
+    install -D --mode=644 "$srcdir/sleep-on-lan.service" "$pkgdir/usr/lib/systemd/system/sleep-on-lan.service"
+}
