@@ -11,6 +11,10 @@ on:
     - cron: "* * * * SUN"
   workflow_dispatch:
 
+permissions:
+  # allow workflow to push images to GHCR
+  packages: "write"
+
 jobs:
   build:
     runs-on: "ubuntu-latest"
