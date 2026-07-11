@@ -7,7 +7,7 @@ on:
 jobs:
   build:
     runs-on: "ubuntu-latest"
-    container: "archlinux:base-devel"
+    container: "ghcr.io/dikoval/arch-repo-builder:latest"
     steps:
       - name: "Install dependencies"
         run: |
