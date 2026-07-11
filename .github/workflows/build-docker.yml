@@ -38,8 +38,7 @@ jobs:
       - name: "Build and push Docker image"
         uses: "docker/build-push-action@v7.3.0"
         with:
-          push:   true
-          # push:   "${{ github.event_name != 'pull_request' }}"
+          push:   "${{ github.event_name != 'pull_request' }}"
           tags:   "${{ steps.docker-metadata.outputs.tags }}"
           labels: "${{ steps.docker-metadata.outputs.labels }}"
 ...
