@@ -13,7 +13,7 @@ permissions:
 jobs:
   build:
     runs-on: "ubuntu-latest"
-    container: "ghcr.io/dikoval/arch-repo-builder:latest"
+    container: "archlinux:base-devel"
     steps:
       - name: "Install dependencies"
         run: |
