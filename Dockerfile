@@ -9,6 +9,6 @@ RUN <<EOF
 EOF
 
 # git is required to sync submodules with both `checkout` action and `make sync`
-RUN pacman -Sy --needed --noconfirm git make
+RUN pacman -Sy --needed --noconfirm git make namcap
 
 CMD ["/usr/bin/sh"]
