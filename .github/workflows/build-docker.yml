@@ -1,0 +1,39 @@
+---
+name: "Build Docker image"
+
+on:
+  pull_request:
+    paths: [ "Dockerfile" ]
+  push:
+    branches: [ "master" ]
+    paths: [ "Dockerfile" ]
+  schedule:
+    - cron: "* * * * SUN"
+  workflow_dispatch:
+
+jobs:
+  build:
+    runs-on: "ubuntu-latest"
+    steps:
+      - name: "Log in to GitHub Container Registry"
+        uses: "docker/login-action@v4.4.0"
+        with:
+          registry: "ghcr.io"
+          username: "${{ github.actor }}"
+          password: "${{ secrets.GITHUB_TOKEN }}"
+
+      - name: "Extract metadata (tags, labels) for Docker"
+        uses: "docker/metadata-action@v6.2.0"
+        with:
+          images: "ghcr.io/${{ github.repository_owner }}/arch-repo-builder"
+          tags: |
+            type=sha,format=long
+            type=raw,value=latest
+
+      - name: "Build and push Docker image"
+        uses: "docker/build-push-action@v7.3.0"
+        with:
+          push:   "${{ github.event_name != 'pull_request' }}"
+          tags:   "${{ steps.meta.outputs.tags }}"
+          labels: "${{ steps.meta.outputs.labels }}"
+...
