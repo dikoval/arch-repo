@@ -1,4 +1,9 @@
 # Personal Arch Linux repository
+
+[![Build and release](https://github.com/dikoval/arch-repo/actions/workflows/build-release.yml/badge.svg?branch=master)](https://github.com/dikoval/arch-repo/actions/workflows/build-release.yml)
+[![Build Docker image](https://github.com/dikoval/arch-repo/actions/workflows/build-docker.yml/badge.svg)](https://github.com/dikoval/arch-repo/actions/workflows/build-docker.yml)
+[![GitHub Release Date](https://img.shields.io/github/release-date/dikoval/arch-repo?display_date=published_at)](https://github.com/dikoval/arch-repo/releases)
+
 This repository contains a mix of AUR and custom packages, which I use.
 Repository is hosted via GitHub Releases.
 
