@@ -19,8 +19,12 @@ jobs:
         with:
           submodules: "recursive"
 
-      - name: "Build all packages"
-        uses: "./.github/actions/build-all-packages"
+      - name: "Build"
+        run: |
+          # use $BUILDER_USER from base container
+          chown -R $BUILDER_USER $GITHUB_WORKSPACE
+
+          runuser --user $BUILDER_USER make build
 
       - name: "Update repository"
         run: "make update-repo"
