@@ -7,13 +7,8 @@ on:
 jobs:
   build:
     runs-on: "ubuntu-latest"
-    container: "archlinux:base-devel"
+    container: "ghcr.io/dikoval/arch-repo-builder:latest"
     steps:
-      - name: "Install dependencies"
-        run: |
-          # git is required to sync submodules with both `checkout` action and `make sync`
-          pacman -Sy --needed --noconfirm git namcap
-
       - uses: "actions/checkout@v7.0.0"
         with:
           submodules: "recursive"
@@ -23,5 +18,9 @@ jobs:
         continue-on-error: true
 
       - name: "Build all packages"
-        uses: "./.github/actions/build-all-packages"
+        run: |
+          # use $BUILDER_USER from base container to build packages
+          chown -R $BUILDER_USER $GITHUB_WORKSPACE
+
+          runuser --user $BUILDER_USER make build
 ...
