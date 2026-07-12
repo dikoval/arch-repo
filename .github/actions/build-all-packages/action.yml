@@ -2,30 +2,11 @@
 name: "Build all packages"
 description: "Composite action to build all included Arch Linux packages"
 
-# we use inputs as "constants"
-inputs:
-  builder-user:
-    description: "User to build packages"
-    required: true
-    default: "ci-builder"
-
 runs:
   using: "composite"
   steps:
-    - name: "Create builder user"
-      shell: "bash"
-      env:
-        BUILDER_USER: ${{ inputs.builder-user }}
-      run: |
-        # Arch Linux treats its users as children and does not allow to run `makepkg` by `root` user
-        # so we create a new user with same permissions as `root`, but named differently :)
-        useradd --no-create-home $BUILDER_USER
-        echo "$BUILDER_USER ALL=(ALL) NOPASSWD: ALL" > /etc/sudoers.d/$BUILDER_USER
-
     - name: "Build"
       shell: "bash"
-      env:
-        BUILDER_USER: ${{ inputs.builder-user }}
       run: |
         # change workspace ownership
         chown -R $BUILDER_USER $GITHUB_WORKSPACE
