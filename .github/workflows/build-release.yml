@@ -19,9 +19,9 @@ jobs:
         with:
           submodules: "recursive"
 
-      - name: "Build"
+      - name: "Build all packages"
         run: |
-          # use $BUILDER_USER from base container
+          # use $BUILDER_USER from base container to build packages
           chown -R $BUILDER_USER $GITHUB_WORKSPACE
 
           runuser --user $BUILDER_USER make build
