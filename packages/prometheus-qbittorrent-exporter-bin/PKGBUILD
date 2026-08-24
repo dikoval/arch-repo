@@ -10,7 +10,7 @@ url="https://github.com/dikoval/prometheus-qbittorrent-exporter"
 
 backup=("etc/conf.d/prometheus-qbittorrent-exporter")
 source=("https://github.com/dikoval/prometheus-qbittorrent-exporter/releases/download/${pkgver}/prometheus-qbittorrent-exporter.tar.gz")
-sha256sums=("sha256:cf78c87325f453b0c18fbeb2556b1983e3cfc5a03706cd51a346823821355c42")
+sha256sums=("cf78c87325f453b0c18fbeb2556b1983e3cfc5a03706cd51a346823821355c42")
 
 package() {
     install -D --mode=755 "$srcdir/prometheus-qbittorrent-exporter" "$pkgdir/usr/bin/prometheus-qbittorrent-exporter"
