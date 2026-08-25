@@ -37,7 +37,7 @@ jobs:
       # GitHub requires presence of tag for release
       # this action will automatically create/update `latest` tag for usage in release later on
       - name: "Update latest tag"
-        uses: "richardsimko/update-tag@v2.0.0"
+        uses: "richardsimko/update-tag@v3.0.0"
         with:
           tag_name: "latest"
 
