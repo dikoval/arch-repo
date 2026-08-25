@@ -1,0 +1,22 @@
+# Please see the documentation for all configuration options:
+# https://docs.github.com/en/code-security/reference/supply-chain-security/dependabot-options-reference
+
+version: 2
+updates:
+  - package-ecosystem: "gitsubmodule"
+    directory: "/"
+    assignees:
+      - "dikoval"
+    cooldown:
+      default-days: 7
+    schedule:
+      interval: "weekly"
+
+  - package-ecosystem: "github-actions"
+    directory: "/"
+    assignees:
+      - "dikoval"
+    cooldown:
+      default-days: 7
+    schedule:
+      interval: "weekly"
