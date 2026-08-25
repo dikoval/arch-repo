@@ -15,7 +15,7 @@ jobs:
     runs-on: "ubuntu-latest"
     container: "ghcr.io/dikoval/arch-repo-builder:latest"
     steps:
-      - uses: "actions/checkout@v7.0.0"
+      - uses: "actions/checkout@v7.0.1"
         with:
           submodules: "recursive"
 
