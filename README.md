@@ -19,8 +19,13 @@ For own packages:
 * `vim <package-name>/PKGBUILD`
 
 ## How to update existing package?
-1. Update submodule - TODO
-2. Re-build package - `make package/<package-name>` or push the changes for CI to build it
+For AUR packages:
+* update submodule - `git submodule update --remote`
+* re-build package - `make package/<package-name>` or push the changes for CI to build it
+
+For own packages:
+* manually bump version and checksum(s) - `vim packages/<package-name>/PKGBUILD`
+* re-build package - `make package/<package-name>` or push the changes for CI to build it
 
 ## How to add this repository to pacman?
 Add next config piece to `/etc/pacman.conf`:
