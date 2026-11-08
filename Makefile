@@ -10,11 +10,11 @@ sync:
 	git submodule sync --recursive
 	git submodule update --init --recursive
 
-build: refresh-packages $(PACKAGES)
-
 # we need a fresh local package database for makepkg to succeed
 refresh-packages:
 	sudo pacman -Suy
+
+build: refresh-packages $(PACKAGES)
 
 $(PACKAGES):
 	@echo "Building $@..."
