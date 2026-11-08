@@ -12,7 +12,7 @@ sync:
 
 # we need a fresh local package database for makepkg to succeed
 refresh-packages:
-	sudo pacman -Suy
+	sudo pacman -Suy --noconfirm
 
 build: refresh-packages $(PACKAGES)
 
