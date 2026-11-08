@@ -19,10 +19,6 @@ jobs:
         with:
           submodules: "recursive"
 
-      # we need up-to-date local package database for makepkg to succeed
-      - name: "Refresh package list and upgrade system"
-        run: "sudo pacman -Suy"
-
       - name: "Build all packages"
         run: |
           # use $BUILDER_USER from base container to build packages
